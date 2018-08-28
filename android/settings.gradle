@@ -1,0 +1,3 @@
+rootProject.name = 'GroupList'
+
+include ':app'
