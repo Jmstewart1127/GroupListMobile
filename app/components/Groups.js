@@ -30,7 +30,6 @@ export default class Groups extends Component {
   render() {
     return (
       <Container>
-        <Header />
         <Content>
           <Card>
             <CardItem>

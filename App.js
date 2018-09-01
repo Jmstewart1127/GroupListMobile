@@ -1,15 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Groups from "./app/components/Groups";
+import Groups from './app/components/Groups';
+import Lists from './app/components/Lists';
+import SingleList from './app/components/SingleList';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <Text>Groups</Text>
         <Groups/>
+        <Text>Lists</Text>
+        <Lists/>
+        <Text>Items</Text>
+        <SingleList/>
       </View>
     );
   }
