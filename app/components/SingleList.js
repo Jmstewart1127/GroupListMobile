@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-native';
 import { Container, Header, Content, Card, CardItem, List, ListItem, Text, Icon, Right } from 'native-base';
 export default class SingleList extends Component {
   constructor(props) {
@@ -23,8 +24,28 @@ export default class SingleList extends Component {
       });
   };
 
+  completeListItem = itemId => {
+    fetch('https://group-list-api.herokuapp.com/api/item/complete/' + itemId, {
+      method: 'PUT',
+      body: {},
+      headers: {
+        'Content-Type': 'application/json'
+      }
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          listItems: responseJson,
+        });
+        return responseJson;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    })
+
+  };
+
   componentDidMount() {
-    console.log("sup");
     this.getListItemsByListId();
   }
 
@@ -35,10 +56,17 @@ export default class SingleList extends Component {
           <Card>
             <CardItem>
               <List>
-                {this.state.listItems.map((item) => {
+                {this.state.listItems.map((item, id) => {
+                  const completeItem = () => {
+                    this.completeListItem(item.id)
+                  };
                   return(
-                    <ListItem>
-                      <Text>{item.name}</Text>
+                    <ListItem key={id}>
+                      <Button
+                        onPress={completeItem}
+                        title={item.name}
+                        accessibilityLabel={"Tap to complete item"}
+                      />
                     </ListItem>
                   );
                 })}

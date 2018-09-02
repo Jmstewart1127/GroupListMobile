@@ -35,9 +35,9 @@ export default class Lists extends Component {
           <Card>
             <CardItem>
               <List>
-                {this.state.lists.map((list) => {
+                {this.state.lists.map((list, id) => {
                   return(
-                    <ListItem>
+                    <ListItem key={id}>
                       <Text>{list.listName}</Text>
                     </ListItem>
                   );

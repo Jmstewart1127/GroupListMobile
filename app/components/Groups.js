@@ -34,9 +34,9 @@ export default class Groups extends Component {
           <Card>
             <CardItem>
               <List>
-                {this.state.groups.map((group) => {
+                {this.state.groups.map((group, id) => {
                   return(
-                    <ListItem>
+                    <ListItem key={id}>
                       <Text>{group.groupName}</Text>
                     </ListItem>
                   );
