@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-native';
+import { Button, TouchableOpacity } from 'react-native';
 import { Container, Header, Content, Card, CardItem, List, ListItem, Text, Icon, Right } from 'native-base';
 export default class SingleList extends Component {
   constructor(props) {
@@ -31,18 +31,11 @@ export default class SingleList extends Component {
       headers: {
         'Content-Type': 'application/json'
       }
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          listItems: responseJson,
-        });
-        return responseJson;
-      })
+      .then(() => { return 1; })
       .catch((error) => {
         console.error(error);
-      });
+      })
     })
-
   };
 
   componentDidMount() {
@@ -61,13 +54,24 @@ export default class SingleList extends Component {
                     this.completeListItem(item.id)
                   };
                   return(
-                    <ListItem key={id}>
-                      <Button
-                        onPress={completeItem}
-                        title={item.name}
-                        accessibilityLabel={"Tap to complete item"}
-                      />
-                    </ListItem>
+                      <ListItem
+                        key={id}
+                      >
+                        {item.complete ?
+                          <Button
+                            onPress={completeItem}
+                            title={item.name}
+                            accessibilityLabel={"Tap to complete item"}
+                            color={'blue'}
+                          /> :
+                          <Button
+                            onPress={completeItem}
+                            title={item.name}
+                            accessibilityLabel={"Tap to complete item"}
+                            color={'red'}
+                          />
+                        }
+                      </ListItem>
                   );
                 })}
               </List>
@@ -78,3 +82,14 @@ export default class SingleList extends Component {
     );
   }
 }
+
+const styles = {
+  complete: {
+    backgroundColor: 'green',
+    color: 'green',
+  },
+  incomplete: {
+    backgroundColor: 'red',
+    color: 'red',
+  },
+};
